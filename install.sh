@@ -22,14 +22,14 @@ echo '2. Install some useful stuff'
 echo 'sudo pacman -S vim network-manager-applet nm-connection-editor fcitx-unikey fcitx-im fcitx-ui-light kcm-fcitx fcitx-configtool fcitx-cloudpinyin nwg-look nodejs npm systemd-resolvconf'
 sudo pacman -S vim network-manager-applet nm-connection-editor fcitx-unikey fcitx-im fcitx-ui-light kcm-fcitx fcitx-configtool fcitx-cloudpinyin nwg-look nodejs npm systemd-resolvconf 
 echo '(Make sure you say yes when asked to use sudo here)'
-echo 'yay -S swaylock-effects-git hyprshot neovim-git'
-yay -S swaylock-effects-git hyprshot neovim-git
+echo 'yay -S hyprshot neovim-git'
+yay -S hyprshot neovim-git
 #####################################################################################
 
 echo '3. Get packages and add user to video/input groups'
 
-echo 'yay -S brightnessctl coreutils curl fish foot fuzzel gjs gnome-bluetooth-3.0 gnome-control-center gnome-keyring gobject-introspection grim gtk3 gtk-layer-shell libdbusmenu-gtk3 meson networkmanager nlohmann-json npm plasma-browser-integration playerctl polkit-gnome python-pywal ripgrep sassc slurp starship swayidle swaylock typescript upower xorg-xrandr webp-pixbuf-loader wget wireplumber wl-clipboard tesseract yad ydotool adw-gtk3-git cava gojq gradience-git gtklock gtklock-playerctl-module gtklock-powerbar-module gtklock-userinfo-module hyprland-git lexend-fonts-git python-material-color-utilities python-pywal python-poetry python-build python-pillow swww ttf-material-symbols-variable-git ttf-space-mono-nerd ttf-jetbrains-mono-nerd wlogout'
-yay -S brightnessctl coreutils curl fish foot fuzzel gjs gnome-bluetooth-3.0 gnome-control-center gnome-keyring gobject-introspection grim gtk3 gtk-layer-shell libdbusmenu-gtk3 meson networkmanager nlohmann-json npm plasma-browser-integration playerctl polkit-gnome python-pywal ripgrep sassc slurp starship swayidle swaylock typescript upower xorg-xrandr webp-pixbuf-loader wget wireplumber wl-clipboard tesseract yad ydotool adw-gtk3-git cava gojq gradience-git gtklock gtklock-playerctl-module gtklock-powerbar-module gtklock-userinfo-module hyprland-git lexend-fonts-git python-material-color-utilities python-pywal python-poetry python-build python-pillow swww ttf-material-symbols-variable-git ttf-space-mono-nerd ttf-jetbrains-mono-nerd wlogout
+echo 'yay -S brightnessctl coreutils curl fish foot fuzzel gjs gnome-bluetooth-3.0 gnome-control-center gnome-keyring gobject-introspection grim gtk3 gtk-layer-shell libdbusmenu-gtk3 meson networkmanager nlohmann-json npm plasma-browser-integration playerctl polkit-gnome python-pywal ripgrep sassc slurp starship swayidle swaylock-effects-git typescript upower xorg-xrandr webp-pixbuf-loader wget wireplumber wl-clipboard tesseract yad ydotool adw-gtk3-git cava gojq gradience-git gtklock gtklock-playerctl-module gtklock-powerbar-module gtklock-userinfo-module hyprland-git lexend-fonts-git python-material-color-utilities python-pywal python-poetry python-build python-pillow swww ttf-material-symbols-variable-git ttf-space-mono-nerd ttf-jetbrains-mono-nerd wlogout'
+yay -S brightnessctl coreutils curl fish foot fuzzel gjs gnome-bluetooth-3.0 gnome-control-center gnome-keyring gobject-introspection grim gtk3 gtk-layer-shell libdbusmenu-gtk3 meson networkmanager nlohmann-json npm plasma-browser-integration playerctl polkit-gnome python-pywal ripgrep sassc slurp starship swayidle swaylock-effects-git typescript upower xorg-xrandr webp-pixbuf-loader wget wireplumber wl-clipboard tesseract yad ydotool adw-gtk3-git cava gojq gradience-git gtklock gtklock-playerctl-module gtklock-powerbar-module gtklock-userinfo-module hyprland-git lexend-fonts-git python-material-color-utilities python-pywal python-poetry python-build python-pillow swww ttf-material-symbols-variable-git ttf-space-mono-nerd ttf-jetbrains-mono-nerd wlogout
 
 echo "sudo usermod -aG video $user"
 sudo usermod -aG video "$user"
@@ -54,6 +54,7 @@ cp -r "$HOME/Downloads/dotfiles/.config/" "$HOME"
 echo 'cp -r $HOME/Downloads/dotfiles/.local" "$HOME"'
 cp -r "$HOME/Downloads/dotfiles/.local" "$HOME"
 #####################################################################################
+
 echo 'Install WhiteSur-GTK-Theme'
 
 echo 'cd $HOME/Downloads/'
@@ -68,6 +69,7 @@ echo 'Fix for Flatpak gtk-4.0 app:'
 echo 'sudo flatpak override --filesystem=xdg-config/gtk-4.0' 
 sudo flatpak override --filesystem=xdg-config/gtk-4.0
 #####################################################################################
+
 echo 'Install WhiteSur-Icon-Theme'
 
 echo 'cd $HOME/Downloads/'
@@ -77,6 +79,7 @@ git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git && cd WhiteSur-
 echo 'sh ./install.sh -b'
 sh ./install.sh -b
 #####################################################################################
+
 echo 'Install WhiteSur-Kde-Theme'
 
 echo 'Install Kvantum engine.'
