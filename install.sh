@@ -49,10 +49,10 @@ meson install -C build
 
 echo '5. Copying'
 
-echo 'cp -i -r "$HOME/Downloads/My-Dotfiles/.config/" "$HOME"'
-cp -i -r "$HOME/Downloads/My-Dotfiles/.config/" "$HOME"
-echo 'cp -i -r $HOME/Downloads/My-Dotfiles/.local" "$HOME"'
-cp -i -r "$HOME/Downloads/My-Dotfiles/.local" "$HOME"
+echo 'cp -r "$HOME/Downloads/dotfiles/.config/" "$HOME"'
+cp -r "$HOME/Downloads/dotfiles/.config/" "$HOME"
+echo 'cp -r $HOME/Downloads/dotfiles/.local" "$HOME"'
+cp -r "$HOME/Downloads/dotfiles/.local" "$HOME"
 #####################################################################################
 echo 'Install WhiteSur-GTK-Theme'
 
