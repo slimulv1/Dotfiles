@@ -1,5 +1,29 @@
 {
     "recommendations": [
-        "leonardssh.vscord"
+        "leonardssh.vscord",
+        "angular.ng-template",
+        "danielpinto8zz6.c-cpp-compile-run",
+        "danielpinto8zz6.c-cpp-project-generator",
+        "llvm-vs-code-extensions.vscode-clangd",
+        "formulahendry.code-runner",
+        "cweijan.dbclient-jdbc",
+        "ms-azuretools.vscode-docker",
+        "dsznajder.es7-react-js-snippets",
+        "dbaeumer.vscode-eslint",
+        "knisterpeter.vscode-github",
+        "github.vscode-pull-request-github",
+        "github.github-vscode-theme",
+        "ecmel.vscode-html-css",
+        "davidanson.vscode-markdownlint",
+        "pkief.material-icon-theme",
+        "mongodb.mongodb-vscode",
+        "cweijan.vscode-mysql-client2",
+        "esbenp.prettier-vscode",
+        "ms-python.python",
+        "rust-lang.rust-analyzer",
+        "bradlc.vscode-tailwindcss",
+        "octref.vetur",
+        "vue.volar",
+        "icrawl.discord-vscode"
     ]
 }
