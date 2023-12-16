@@ -1,0 +1,11 @@
+{
+    "workbench.colorTheme": "GitHub Dark Colorblind (Beta)",
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "git.enableSmartCommit": true,
+    "tabnine.experimentalAutoImports": true,
+    "bracketPairColorizer.depreciation-notice": false,
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.bracketPairColorization.enabled": true,
+    "security.workspace.trust.untrustedFiles": "open"
+}
