@@ -1,0 +1,16 @@
+{
+    "workbench.colorTheme": "GitHub Dark Colorblind (Beta)",
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "git.enableSmartCommit": true,
+    "tabnine.experimentalAutoImports": true,
+    "bracketPairColorizer.depreciation-notice": false,
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.bracketPairColorization.enabled": true,
+    "security.workspace.trust.untrustedFiles": "open"
+    "terminal.integrated.shell.linux": "/usr/bin/fish",
+    "terminal.integrated.shellArgs.linux": ["-l","-d 3"],
+    "terminal.external.linuxExec": "foot",
+    "omnisharp.path": "/usr/bin/omnisharp",
+    "omnisharp.waitForDebugger": true
+}
