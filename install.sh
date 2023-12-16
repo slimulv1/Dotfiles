@@ -19,11 +19,11 @@ echo '(Make sure you say yes when asked to use sudo here)'
 
 echo '2. Install some useful stuff'
 
-echo 'sudo pacman -S vim network-manager-applet nm-connection-editor fcitx-unikey fcitx-im fcitx-ui-light kcm-fcitx fcitx-configtool fcitx-cloudpinyin nwg-look nodejs npm systemd-resolvconf'
-sudo pacman -S vim network-manager-applet nm-connection-editor fcitx-unikey fcitx-im fcitx-ui-light kcm-fcitx fcitx-configtool fcitx-cloudpinyin nwg-look nodejs npm systemd-resolvconf 
+echo 'sudo pacman -S vim network-manager-applet nm-connection-editor fcitx-unikey fcitx-im fcitx-ui-light kcm-fcitx fcitx-configtool fcitx-cloudpinyin nwg-look nodejs npm systemd-resolvconf spotify-launcher discord'
+sudo pacman -S vim network-manager-applet nm-connection-editor fcitx-unikey fcitx-im fcitx-ui-light kcm-fcitx fcitx-configtool fcitx-cloudpinyin nwg-look nodejs npm systemd-resolvconf spotify-launcher discord
 echo '(Make sure you say yes when asked to use sudo here)'
-echo 'yay -S hyprshot neovim-git gitkraken'
-yay -S hyprshot neovim-git gitkraken
+echo 'yay -S hyprshot neovim-git gitkraken linux-discord-rich-presence'
+yay -S hyprshot neovim-git gitkraken linux-discord-rich-presence
 #####################################################################################
 
 echo '3. Get packages and add user to video/input groups'
@@ -55,6 +55,17 @@ echo 'cp -r $HOME/Downloads/dotfiles/.local" "$HOME"'
 cp -r "$HOME/Downloads/dotfiles/.local" "$HOME"
 #####################################################################################
 
+echo 'Enable Rich Precense (discord rpc)'
+
+echo 'ln -sf $XDG_RUNTIME_DIR/{app/com.discordapp.Discord,}/discord-ipc-0 '
+ln -sf $XDG_RUNTIME_DIR/{app/com.discordapp.Discord,}/discord-ipc-0 
+echo 'mkdir -p ~/.config/user-tmpfiles.d'
+mkdir -p ~/.config/user-tmpfiles.d
+echo 'echo 'L %t/discord-ipc-0 - - - - app/com.discordapp.Discord/discord-ipc-0' > ~/.config/user-tmpfiles.d/discord-rpc.conf'
+echo 'L %t/discord-ipc-0 - - - - app/com.discordapp.Discord/discord-ipc-0' > ~/.config/user-tmpfiles.d/discord-rpc.conf
+echo 'systemctl --user enable --now systemd-tmpfiles-setup.service'
+systemctl --user enable --now systemd-tmpfiles-setup.service
+#####################################################################################
 echo 'Install WhiteSur-GTK-Theme'
 
 echo 'cd $HOME/Downloads/'
