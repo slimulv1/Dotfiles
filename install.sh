@@ -22,8 +22,8 @@ echo '2. Install some useful stuff'
 echo 'sudo pacman -S vim network-manager-applet nm-connection-editor fcitx-unikey fcitx-im fcitx-ui-light kcm-fcitx fcitx-configtool fcitx-cloudpinyin nwg-look nodejs npm systemd-resolvconf spotify-launcher discord'
 sudo pacman -S vim network-manager-applet nm-connection-editor fcitx-unikey fcitx-im fcitx-ui-light kcm-fcitx fcitx-configtool fcitx-cloudpinyin nwg-look nodejs npm systemd-resolvconf spotify-launcher discord
 echo '(Make sure you say yes when asked to use sudo here)'
-echo 'yay -S hyprshot neovim-git gitkraken linux-discord-rich-presence vscodium-bin'
-yay -S hyprshot neovim-git gitkraken linux-discord-rich-presence vscodium-bin
+echo 'yay -S hyprshot neovim-git gitkraken linux-discord-rich-presence vscodium-bin visual-studio-code-bin'
+yay -S hyprshot neovim-git gitkraken linux-discord-rich-presence vscodium-bin visual-studio-code-bin
 #####################################################################################
 
 echo '3. Get packages and add user to video/input groups'
