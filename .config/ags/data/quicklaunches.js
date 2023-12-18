@@ -9,6 +9,6 @@ export const quickLaunchItems = [
     },
     {
         "name": "Web Workspace",
-        "command": "xdg-open 'https://facebook.com' & xdg-open 'https://x.com/' & xdg-open 'https://github.com/' & xdg-open 'https://youtube.com/' &"
+        "command": "xdg-open 'https://www.facebook.com/' & xdg-open 'https://x.com/' & xdg-open 'https://github.com/' & xdg-open 'https://youtube.com/' &"
     },
 ]
