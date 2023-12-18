@@ -1,7 +1,7 @@
 export const quickLaunchItems = [
     {
         "name": "GitHub + Files×2",
-        "command": "github-desktop & nautilus --new-window & nautilus --new-window &"
+        "command": "nautilus --new-window & nautilus --new-window & github-desktop &"
     },
     {
         "name": "Terminal×2",
