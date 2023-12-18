@@ -8,7 +8,7 @@ export const quickLaunchItems = [
         "command": "foot & foot &"
     },
     {
-        "name": "Discord + Youtube + Github",
-        "command": "xdg-open 'https://discord.com/app' && xdg-open 'https://youtube.com/' && xdg-open 'https://github.com/' &"
+        "name": "Web Workspace",
+        "command": "xdg-open 'https://facebook.com' && xdg-open 'https://x.com/' && xdg-open 'https://github.com/' && xdg-open 'https://youtube.com/' &"
     },
 ]
