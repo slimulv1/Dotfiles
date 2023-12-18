@@ -27,6 +27,3 @@ fi
 
 # Generate colors for ags n stuff
 "$HOME"/.config/ags/scripts/color_generation/colorgen.sh "${imgpath}" --apply
-sassc "$HOME"/.config/ags/scss/main.scss "$HOME"/.config/ags/style.css
-ags run-js 'openColorScheme.value = true; Utils.timeout(2000, () => openColorScheme.value = false);'
-ags run-js "App.resetCss(); App.applyCss('${HOME}/.config/ags/style.css');"
