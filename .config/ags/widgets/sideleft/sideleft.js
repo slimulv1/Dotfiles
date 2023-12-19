@@ -40,8 +40,8 @@ const TabButton = (stack, stackItem, navIndicator, navIndex, icon, label) => Wid
         ]
     }),
     setup: (button) => Utils.timeout(1, () => {
-        button.toggleClassName('sidebar-selector-tab-active', defaultTab === stackItem);
         setupCursorHover(button);
+        button.toggleClassName('sidebar-selector-tab-active', defaultTab === stackItem);
     }),
 });
 

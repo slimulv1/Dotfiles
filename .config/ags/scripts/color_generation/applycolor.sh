@@ -9,9 +9,9 @@ colorlist=()
 colorvalues=()
 
 if [[ "$1" = "--bad-apple" ]]; then
-    cp scripts/color_generation/_material_badapple.scss scss/_material.scss
-    colornames=$(cat scripts/color_generation/_material_badapple.scss | cut -d: -f1)
-    colorstrings=$(cat scripts/color_generation/_material_badapple.scss | cut -d: -f2 | cut -d ' ' -f2 | cut -d ";" -f1)
+    cp scripts/color_generation/specials/_material_badapple.scss scss/_material.scss
+    colornames=$(cat scripts/color_generation/specials/_material_badapple.scss | cut -d: -f1)
+    colorstrings=$(cat scripts/color_generation/specials/_material_badapple.scss | cut -d: -f2 | cut -d ' ' -f2 | cut -d ";" -f1)
     IFS=$'\n'
     # filearr=( $filelist ) # Get colors
     colorlist=( $colornames ) # Array of color names

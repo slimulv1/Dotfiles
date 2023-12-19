@@ -236,8 +236,8 @@ export const TodoWidget = () => {
             ]
         }),
         setup: (button) => Utils.timeout(1, () => {
-            button.toggleClassName('sidebar-selector-tab-active', defaultTodoSelected === `${isDone ? 'done' : 'undone'}`);
             setupCursorHover(button);
+            button.toggleClassName('sidebar-selector-tab-active', defaultTodoSelected === `${isDone ? 'done' : 'undone'}`);
         }),
     });
     const undoneButton = TodoTabButton(false, 0);
@@ -250,8 +250,7 @@ export const TodoWidget = () => {
         hexpand: true,
         vertical: true,
         className: 'spacing-v-10',
-        setup: (box) => Utils.timeout(1, () => {
-            // undone/done selector rail
+        setup: (box) => {     // undone/done selector rail
             box.pack_start(Widget.Box({
                 vertical: true,
                 children: [
@@ -271,7 +270,7 @@ export const TodoWidget = () => {
                 ]
             }), false, false, 0);
             box.pack_end(todoItemsBox, true, true, 0);
-        })
+        },
     });
 };
 

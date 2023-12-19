@@ -156,7 +156,7 @@ const chatView = Scrollable({
         const vScrollbar = scrolledWindow.get_vscrollbar();
         vScrollbar.get_style_context().add_class('sidebar-scrollbar');
 
-        Utils.timeout(1, () => {
+        Utils.timeout(1, () => { // Fix click-to-scroll-widget-to-view behavior
             const viewport = scrolledWindow.child;
             viewport.set_focus_vadjustment(new Gtk.Adjustment(undefined));
         })

@@ -41,11 +41,7 @@ const ResourceValue = (name, icon, interval, valueUpdateCmd, displayFunc, props 
             overlays: [
                 MaterialIcon(`${icon}`, 'hugeass'),
             ],
-            setup: self => {
-                Utils.timeout(1, () => {
-                    self.set_overlay_pass_through(self.get_children()[1], true);
-                })
-            },
+            setup: self => self.set_overlay_pass_through(self.get_children()[1], true),
         }),
     ]
 })
@@ -88,7 +84,7 @@ const distroAndVersion = Box({
                 Label({
                     className: 'bg-distro-txt',
                     xalign: 0,
-                    label: '(˵¯͒〰¯͒˵) Hyping on ',
+                    label: 'Hyping on ',
                 }),
                 Label({
                     className: 'bg-distro-name',

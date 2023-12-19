@@ -16,6 +16,23 @@
     caret-color: $primary;
 }
 
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+tooltip {
+    animation-name: appear;
+    animation-duration: 100ms;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+}
+
 menu {
     @include elevation-border-softer;
     padding: 0.681rem;
@@ -23,6 +40,11 @@ menu {
     color: $onSurfaceVariant;
     border-radius: 1.159rem;
     -gtk-outline-radius: 1.159rem;
+
+    animation-name: appear;
+    animation-duration: 100ms;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
 }
 
 menubar>menuitem {

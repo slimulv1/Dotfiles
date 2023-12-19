@@ -180,8 +180,8 @@ const StackButton = (stackItemName, icon, name) => Widget.Button({
         ]
     }),
     setup: (button) => Utils.timeout(1, () => {
-        button.toggleClassName('sidebar-navrail-btn-active', defaultShown === stackItemName);
         setupCursorHover(button);
+        button.toggleClassName('sidebar-navrail-btn-active', defaultShown === stackItemName);
     })
 });
 
