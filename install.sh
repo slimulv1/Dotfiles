@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
+echo 'Hi there!'
 echo 'Greetings! This script will help you install this hyprland config.'
-echo 'BACKUP YOUR CONFIG FOLDER IF NEEDED.'
+echo 'This script 1. only works for ArchLinux and Arch-based distros.'
+echo '            2. is not tested, use at your own risk.'
+echo '            3. will show all commands that it runs.'
+echo '            4. should be run from its folder.'
+echo '====BACKUP YOUR CONFIG FOLDER IF NEEDED!===='
 echo 'All commands will be shown.'
 echo 'Ctrl+C to exit. Enter to continue.'
 read
