@@ -18,3 +18,6 @@ starship init fish | source
 #   set_color cyan; echo (pwd) 
 #   set_color green; echo '> '
 # end
+function update-ags
+    sh ~/.config/hypr/scripts/update-ags.sh
+end
