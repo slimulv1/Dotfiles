@@ -51,31 +51,7 @@ export const chatGPTInfo = Box({
     ]
 })
 
-export const apiKeyInstructions = Box({
-    homogeneous: true,
-    children: [Revealer({
-        transition: 'slide_down',
-        transitionDuration: 150,
-        connections: [[ChatGPT, (self, hasKey) => {
-            self.revealChild = (ChatGPT.key.length == 0);
-        }, 'hasKey']],
-        child: Button({
-            child: Label({
-                useMarkup: true,
-                wrap: true,
-                className: 'txt sidebar-chat-welcome-txt',
-                justify: Gtk.Justification.CENTER,
-                label: 'An OpenAI API key is required\nYou can grab one <u>here</u>, then enter it below'
-            }),
-            setup: setupCursorHover,
-            onClicked: () => {
-                Utils.execAsync(['bash', '-c', `xdg-open https://platform.openai.com/api-keys &`]);
-            }
-        })
-    })]
-});
-
-const chatGPTSettings = Revealer({
+export const chatGPTSettings = Revealer({
     transition: 'slide_down',
     transitionDuration: 150,
     revealChild: true,
@@ -114,7 +90,31 @@ const chatGPTSettings = Revealer({
     })
 });
 
-const chatGPTWelcome = Box({
+export const openaiApiKeyInstructions = Box({
+    homogeneous: true,
+    children: [Revealer({
+        transition: 'slide_down',
+        transitionDuration: 150,
+        connections: [[ChatGPT, (self, hasKey) => {
+            self.revealChild = (ChatGPT.key.length == 0);
+        }, 'hasKey']],
+        child: Button({
+            child: Label({
+                useMarkup: true,
+                wrap: true,
+                className: 'txt sidebar-chat-welcome-txt',
+                justify: Gtk.Justification.CENTER,
+                label: 'An OpenAI API key is required\nYou can grab one <u>here</u>, then enter it below'
+            }),
+            setup: setupCursorHover,
+            onClicked: () => {
+                Utils.execAsync(['bash', '-c', `xdg-open https://platform.openai.com/api-keys &`]);
+            }
+        })
+    })]
+});
+
+export const chatGPTWelcome = Box({
     vexpand: true,
     homogeneous: true,
     child: Box({
@@ -123,13 +123,13 @@ const chatGPTWelcome = Box({
         vertical: true,
         children: [
             chatGPTInfo,
-            apiKeyInstructions,
+            openaiApiKeyInstructions,
             chatGPTSettings,
         ]
     })
-})
+});
 
-export const chatGPTContent = Box({
+export const chatContent = Box({
     className: 'spacing-v-15',
     vertical: true,
     connections: [
@@ -150,7 +150,7 @@ export const chatGPTContent = Box({
 export const chatGPTView = Scrollable({
     className: 'sidebar-chat-viewport',
     vexpand: true,
-    child: chatGPTContent,
+    child: chatContent,
     setup: (scrolledWindow) => {
         scrolledWindow.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
         const vScrollbar = scrolledWindow.get_vscrollbar();
@@ -161,7 +161,7 @@ export const chatGPTView = Scrollable({
             viewport.set_focus_vadjustment(new Gtk.Adjustment(undefined));
         })
     }
-})
+});
 
 export const chatGPTCommands = Box({
     className: 'spacing-h-5',
@@ -175,7 +175,7 @@ export const chatGPTCommands = Box({
         }),
         Button({
             className: 'sidebar-chat-chip sidebar-chat-chip-action txt txt-small',
-            onClicked: () => chatGPTContent.add(SystemMessage(
+            onClicked: () => chatContent.add(SystemMessage(
                 `Currently using \`${ChatGPT.modelName}\``,
                 '/model'
             )),
@@ -190,36 +190,3 @@ export const chatGPTCommands = Box({
         }),
     ]
 });
-
-const sendChatMessage = () => {
-    // Check if text or API key is empty
-    if (chatEntry.text.length == 0) return;
-    if (ChatGPT.key.length == 0) {
-        ChatGPT.key = chatEntry.text;
-        chatGPTContent.add(SystemMessage(`Key saved to\n\`${ChatGPT.keyPath}\``, 'API Key'));
-        chatEntry.text = '';
-        return;
-    }
-    // Commands
-    if (chatEntry.text.startsWith('/')) {
-        if (chatEntry.text.startsWith('/clear')) ChatGPT.clear();
-        else if (chatEntry.text.startsWith('/model')) chatGPTContent.add(SystemMessage(`Currently using \`${ChatGPT.modelName}\``, '/model'))
-        else if (chatEntry.text.startsWith('/key')) {
-            const parts = chatEntry.text.split(' ');
-            if (parts.length == 1) chatGPTContent.add(SystemMessage(`See \`${ChatGPT.keyPath}\``, '/key'));
-            else {
-                ChatGPT.key = parts[1];
-                chatGPTContent.add(SystemMessage(`Updated API Key at\n\`${ChatGPT.keyPath}\``, '/key'));
-            }
-        }
-        else if (chatEntry.text.startsWith('/test'))
-            chatGPTContent.add(SystemMessage(markdownTest, `Markdown test`));
-        else
-            chatGPTContent.add(SystemMessage(`Invalid command.`, 'Error'))
-    }
-    else {
-        ChatGPT.send(chatEntry.text);
-    }
-
-    chatEntry.text = '';
-}
