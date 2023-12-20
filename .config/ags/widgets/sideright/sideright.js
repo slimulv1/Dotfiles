@@ -3,14 +3,15 @@ import { Utils, Widget } from '../../imports.js';
 const { execAsync, exec } = Utils;
 const { Box, EventBox } = Widget;
 import {
-    ToggleIconBluetooth, 
-    ToggleIconWifi, 
-    HyprToggleIcon, 
+    ToggleIconBluetooth,
+    ToggleIconWifi,
+    HyprToggleIcon,
     ModuleNightLight,
     ModuleInvertColors,
-    ModuleEditIcon, 
-    ModuleReloadIcon, 
-    ModuleSettingsIcon, 
+    ModuleIdleInhibitor,
+    ModuleEditIcon,
+    ModuleReloadIcon,
+    ModuleSettingsIcon,
     ModulePowerIcon
 } from "./quicktoggles.js";
 import ModuleNotificationList from "./notificationlist.js";
@@ -21,11 +22,11 @@ import { ModuleCalendar } from "./calendar.js";
 //     className: 'sidebar-group spacing-h-10',
 //     setup: (self) => {
 //         self.set_max_children_per_line(NUM_OF_TOGGLES_PER_LINE);
-//         self.add(ToggleIconWifi({ hexpand: 'true' }));
-//         self.add(ToggleIconBluetooth({ hexpand: 'true' }));
-//         self.add(HyprToggleIcon('mouse', 'Raw input', 'input:force_no_accel', { hexpand: 'true' }));
-//         self.add(HyprToggleIcon('front_hand', 'No touchpad while typing', 'input:touchpad:disable_while_typing', { hexpand: 'true' }));
-//         self.add(ModuleNightLight({ hexpand: 'true' }));
+//         self.add(ToggleIconWifi({ hexpand: true }));
+//         self.add(ToggleIconBluetooth({ hexpand: true }));
+//         self.add(HyprToggleIcon('mouse', 'Raw input', 'input:force_no_accel', { hexpand: true }));
+//         self.add(HyprToggleIcon('front_hand', 'No touchpad while typing', 'input:touchpad:disable_while_typing', { hexpand: true }));
+//         self.add(ModuleNightLight({ hexpand: true }));
 //         // Setup flowbox rearrange
 //         self.connect('child-activated', (self, child) => {
 //             if (child.get_index() === 0) {
@@ -37,20 +38,26 @@ import { ModuleCalendar } from "./calendar.js";
 //     }
 // })
 
-const togglesBox = Widget.Box({ // TODO: Fix js error spam here
-    className: 'sidebar-group spacing-h-10',
+const togglesBox = Widget.Box({
+    homogeneous: true,
     children: [
-        ToggleIconWifi({ hexpand: 'true' }),
-        ToggleIconBluetooth({ hexpand: 'true' }),
-        HyprToggleIcon('mouse', 'Raw input', 'input:force_no_accel', { hexpand: 'true' }),
-        HyprToggleIcon('front_hand', 'No touchpad while typing', 'input:touchpad:disable_while_typing', { hexpand: 'true' }),
-        ModuleNightLight({ hexpand: 'true' }),
-        ModuleInvertColors({ hexpand: 'true' }),
+        Widget.Box({
+            hpack: 'center',
+            className: 'sidebar-group spacing-h-10',
+            children: [
+                ToggleIconWifi(),
+                ToggleIconBluetooth(),
+                HyprToggleIcon('mouse', 'Raw input', 'input:force_no_accel', {}),
+                HyprToggleIcon('front_hand', 'No touchpad while typing', 'input:touchpad:disable_while_typing', {}),
+                ModuleNightLight(),
+                ModuleInvertColors(),
+                ModuleIdleInhibitor(),
+            ]
+        })
     ]
 })
 
 export default () => Box({
-    // vertical: true,
     vexpand: true,
     hexpand: true,
     children: [

@@ -146,11 +146,11 @@ export const NetworkIndicator = () => Widget.Stack({
         ['wired', NetworkWiredIndicator()],
     ],
     connections: [[Network, stack => {
-        const primary = Network.primary || 'fallback';
+        let primary = Network.primary || 'fallback';
         if (primary == 'wifi' || primary == 'wired')
             stack.shown = primary;
         else
-            primary = 'fallback';
+            stack.shown = 'fallback';
     }]],
 });
 

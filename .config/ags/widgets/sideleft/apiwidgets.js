@@ -8,50 +8,58 @@ import { setupCursorHover, setupCursorHoverInfo } from "../../lib/cursorhover.js
 import { SystemMessage, ChatMessage } from "./chatmessage.js";
 import { ConfigToggle } from '../../lib/configwidgets.js';
 import { markdownTest } from './md2pango.js';
+import { chatGPTInfo, chatGPTCommands, chatGPTContent, chatGPTView } from './apis/chatgpt.js';
 
-const chatGPTInfo = Box({
-    vertical: true,
-    className: 'spacing-v-15',
-    children: [
-        Icon({
-            hpack: 'center',
-            className: 'sidebar-chat-welcome-logo',
-            icon: `${App.configDir}/assets/openai-logomark.svg`,
-            setup: (self) => Utils.timeout(1, () => {
-                const styleContext = self.get_style_context();
-                const width = styleContext.get_property('min-width', Gtk.StateFlags.NORMAL);
-                const height = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL);
-                self.size = Math.max(width, height, 1) * 116 / 180; // Why such a specific proportion? See https://openai.com/brand#logos
+const ApiSwitcherTabButton = (stack, stackItem, navIndicator, navIndex, icon, label) => Widget.Button({
+    // hexpand: true,
+    className: 'sidebar-selector-tab',
+    onClicked: (self) => {
+        stack.shown = stackItem;
+        // Add active class to self and remove for others
+        const allTabs = self.get_parent().get_children();
+        for (let i = 0; i < allTabs.length; i++) {
+            if (allTabs[i] != self) allTabs[i].toggleClassName('sidebar-selector-tab-active', false);
+            else self.toggleClassName('sidebar-selector-tab-active', true);
+        }
+        // Fancy highlighter line width
+        const buttonWidth = self.get_allocated_width();
+        const highlightWidth = self.get_children()[0].get_allocated_width();
+        navIndicator.css = `
+            font-size: ${navIndex}px; 
+            padding: 0px ${(buttonWidth - highlightWidth) / 2}px;
+        `;
+    },
+    child: Box({
+        hpack: 'center',
+        className: 'spacing-h-5',
+        children: [
+            MaterialIcon(icon, 'larger'),
+            Label({
+                className: 'txt txt-smallie',
+                label: label,
             })
-        }),
-        Label({
-            className: 'txt txt-title-small sidebar-chat-welcome-txt',
-            wrap: true,
-            justify: Gtk.Justification.CENTER,
-            label: 'ChatGPT',
-        }),
+        ]
+    }),
+    setup: (button) => Utils.timeout(1, () => {
+        setupCursorHover(button);
+        button.toggleClassName('sidebar-selector-tab-active', defaultTab === stackItem);
+    }),
+});
+
+const apiSwitcher = Box({
+    vertical: true,
+    children: [
         Box({
-            className: 'spacing-h-5',
-            hpack: 'center',
+            homogeneous: true,
             children: [
-                Label({
-                    className: 'txt-smallie txt-subtext',
-                    wrap: true,
-                    justify: Gtk.Justification.CENTER,
-                    label: 'Powered by OpenAI',
-                }),
-                Button({
-                    className: 'txt-subtext txt-norm icon-material',
-                    label: 'info',
-                    tooltipText: 'Uses the gpt-3.5-turbo model.\nNot affiliated, endorsed, or sponsored by OpenAI.',
-                    setup: setupCursorHoverInfo,
-                }),
+                // ApiSwitcherTabButton(contentStack, 'apis', navIndicator, 0, 'api', 'APIs'),
+                // ApiSwitcherTabButton(contentStack, 'tools', navIndicator, 1, 'home_repair_service', 'Tools'),
             ]
         }),
     ]
 })
 
-const apiKeyInstructions = Box({
+const openaiApiKeyInstructions = Box({
     homogeneous: true,
     children: [Revealer({
         transition: 'slide_down',
@@ -114,108 +122,31 @@ const chatGPTSettings = Revealer({
     })
 });
 
-const chatWelcome = Box({
-    vexpand: true,
-    homogeneous: true,
-    child: Box({
-        className: 'spacing-v-15',
-        vpack: 'center',
-        vertical: true,
-        children: [
-            chatGPTInfo,
-            apiKeyInstructions,
-            chatGPTSettings,
-        ]
-    })
-})
-
-const chatContent = Box({
-    className: 'spacing-v-15',
-    vertical: true,
-    connections: [
-        [ChatGPT, (box, id) => {
-            const message = ChatGPT.messages[id];
-            if (!message) return;
-            box.add(ChatMessage(message))
-        }, 'newMsg'],
-        [ChatGPT, (box) => {
-            box.children = [chatWelcome];
-        }, 'clear'],
-        [ChatGPT, (box) => {
-            box.children = [chatWelcome];
-        }, 'initialized'],
-    ]
-});
-
-const chatView = Scrollable({
-    className: 'sidebar-chat-viewport',
-    vexpand: true,
-    child: chatContent,
-    setup: (scrolledWindow) => {
-        scrolledWindow.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
-        const vScrollbar = scrolledWindow.get_vscrollbar();
-        vScrollbar.get_style_context().add_class('sidebar-scrollbar');
-
-        Utils.timeout(1, () => { // Fix click-to-scroll-widget-to-view behavior
-            const viewport = scrolledWindow.child;
-            viewport.set_focus_vadjustment(new Gtk.Adjustment(undefined));
-        })
-    }
-})
-
-const chatCommands = Box({
-    className: 'spacing-h-5',
-    children: [
-        Box({ hexpand: true }),
-        Button({
-            className: 'sidebar-chat-chip sidebar-chat-chip-action txt txt-small',
-            onClicked: () => chatEntry.text = '/key',
-            setup: setupCursorHover,
-            label: '/key',
-        }),
-        Button({
-            className: 'sidebar-chat-chip sidebar-chat-chip-action txt txt-small',
-            onClicked: () => chatContent.add(SystemMessage(
-                `Currently using \`${ChatGPT.modelName}\``,
-                '/model'
-            )),
-            setup: setupCursorHover,
-            label: '/model',
-        }),
-        Button({
-            className: 'sidebar-chat-chip sidebar-chat-chip-action txt txt-small',
-            onClicked: () => ChatGPT.clear(),
-            setup: setupCursorHover,
-            label: '/clear',
-        }),
-    ]
-});
-
 const sendChatMessage = () => {
     // Check if text or API key is empty
     if (chatEntry.text.length == 0) return;
     if (ChatGPT.key.length == 0) {
         ChatGPT.key = chatEntry.text;
-        chatContent.add(SystemMessage(`Key saved to\n\`${ChatGPT.keyPath}\``, 'API Key'));
+        chatGPTContent.add(SystemMessage(`Key saved to\n\`${ChatGPT.keyPath}\``, 'API Key'));
         chatEntry.text = '';
         return;
     }
     // Commands
     if (chatEntry.text.startsWith('/')) {
         if (chatEntry.text.startsWith('/clear')) ChatGPT.clear();
-        else if (chatEntry.text.startsWith('/model')) chatContent.add(SystemMessage(`Currently using \`${ChatGPT.modelName}\``, '/model'))
+        else if (chatEntry.text.startsWith('/model')) chatGPTContent.add(SystemMessage(`Currently using \`${ChatGPT.modelName}\``, '/model'))
         else if (chatEntry.text.startsWith('/key')) {
             const parts = chatEntry.text.split(' ');
-            if (parts.length == 1) chatContent.add(SystemMessage(`See \`${ChatGPT.keyPath}\``, '/key'));
+            if (parts.length == 1) chatGPTContent.add(SystemMessage(`See \`${ChatGPT.keyPath}\``, '/key'));
             else {
                 ChatGPT.key = parts[1];
-                chatContent.add(SystemMessage(`Updated API Key at\n\`${ChatGPT.keyPath}\``, '/key'));
+                chatGPTContent.add(SystemMessage(`Updated API Key at\n\`${ChatGPT.keyPath}\``, '/key'));
             }
         }
         else if (chatEntry.text.startsWith('/test'))
-            chatContent.add(SystemMessage(markdownTest, `Markdown test`));
+            chatGPTContent.add(SystemMessage(markdownTest, `Markdown test`));
         else
-            chatContent.add(SystemMessage(`Invalid command.`, 'Error'))
+            chatGPTContent.add(SystemMessage(`Invalid command.`, 'Error'))
     }
     else {
         ChatGPT.send(chatEntry.text);
@@ -246,19 +177,37 @@ export const chatEntry = Entry({
     onAccept: () => sendChatMessage(),
 });
 
+const textboxArea = Box({ // Entry area
+    className: 'sidebar-chat-textarea spacing-h-10',
+    children: [
+        chatEntry,
+        chatSendButton,
+    ]
+});
+
+const apiContentStack = Stack({
+    vexpand: true,
+    transition: 'slide_left_right',
+    items: [
+        ['chatgpt', chatGPTView],
+    ],
+})
+
+const apiCommandStack = Stack({
+    transition: 'slide_up_down',
+    items: [
+        ['chatgpt', chatGPTCommands],
+    ],
+})
+
 export default Widget.Box({
     vertical: true,
     className: 'spacing-v-10',
     homogeneous: false,
     children: [
-        chatView,
-        chatCommands,
-        Box({ // Entry area
-            className: 'sidebar-chat-textarea spacing-h-10',
-            children: [
-                chatEntry,
-                chatSendButton,
-            ]
-        }),
+        apiSwitcher,
+        apiContentStack,
+        apiCommandStack,
+        textboxArea,
     ]
 });
