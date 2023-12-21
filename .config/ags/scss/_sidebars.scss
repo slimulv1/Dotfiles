@@ -1,8 +1,8 @@
 $sidebar_chat_textboxareaColor: mix($onSurfaceVariant, $surfaceVariant, 40%);
-$system: #75A79A;
-$onSystem: #CBDED9;
-$chatgpt: #19C37D;
-$onChatgpt: #D5F4E7;
+$system: $secondary;
+$onSystem: $onSecondary;
+$chatgpt: $primary;
+$onChatgpt: $onPrimary;
 
 @mixin group-padding {
     padding: 0.341rem;
@@ -52,14 +52,12 @@ $onChatgpt: #D5F4E7;
 
 .sidebar-group {
     @include normal-rounding;
-    // @include elevation-border;
     @include group-padding;
     background-color: $t_surface;
 }
 
 .sidebar-group-nopad {
     @include normal-rounding;
-    // @include elevation-border;
     background-color: $t_surface;
 }
 
@@ -69,6 +67,12 @@ $onChatgpt: #D5F4E7;
 
 .sidebar-group-invisible-morehorizpad {
     padding: 0.341rem 0.682rem;
+}
+
+.sidebar-togglesbox {
+    @include full-rounding;
+    @include group-padding;
+    background-color: $t_surface;
 }
 
 .sidebar-iconbutton {
@@ -556,7 +560,7 @@ $onChatgpt: #D5F4E7;
 }
 
 .sidebar-chat-indicator-user {
-    background-color: $primary;
+    background-color: $onBackground;
 }
 
 .sidebar-chat-indicator-bot {

@@ -9,6 +9,18 @@ import { SystemMessage, ChatMessage } from "./chatgpt_chatmessage.js";
 import { ConfigToggle } from '../../../lib/configwidgets.js';
 import { markdownTest } from '../../../lib/md2pango.js';
 
+const chatGPTTabIcon = Icon({
+    hpack: 'center',
+    className: 'sidebar-chat-welcome-logo',
+    icon: `${App.configDir}/assets/openai-logomark.svg`,
+    setup: (self) => Utils.timeout(1, () => {
+        const styleContext = self.get_style_context();
+        const width = styleContext.get_property('min-width', Gtk.StateFlags.NORMAL);
+        const height = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL);
+        self.size = Math.max(width, height, 1) * 116 / 180; // Why such a specific proportion? See https://openai.com/brand#logos
+    })
+});
+
 export const chatGPTInfo = Box({
     vertical: true,
     className: 'spacing-v-15',

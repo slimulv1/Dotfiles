@@ -4,16 +4,69 @@ const { Box, Button, Entry, EventBox, Icon, Label, Revealer, Scrollable, Stack }
 const { execAsync, exec } = Utils;
 import { MaterialIcon } from "../../../lib/materialicon.js";
 import { convert } from "../../../lib/md2pango.js";
+import GtkSource from "gi://GtkSource?version=3.0";
 
+const CUSTOM_SOURCEVIEW_SCHEME_PATH = `${App.configDir}/data/sourceviewtheme.xml`;
+const CUSTOM_SCHEME_ID = 'custom';
 const USERNAME = GLib.get_user_name();
 const CHATGPT_CURSOR = '  >> ';
 const MESSAGE_SCROLL_DELAY = 13; // In milliseconds, the time before an updated message scrolls to bottom
+
+/////////////////////// Custom source view colorscheme /////////////////////////
+
+function loadCustomColorScheme(filePath) {
+    // Read the XML file content
+    const file = Gio.File.new_for_path(filePath);
+    const [success, contents] = file.load_contents(null);
+
+    if (!success) {
+        logError('Failed to load the XML file.');
+        return;
+    }
+
+    // Parse the XML content and set the Style Scheme
+    const schemeManager = GtkSource.StyleSchemeManager.get_default();
+    schemeManager.append_search_path(file.get_parent().get_path());
+}
+loadCustomColorScheme(CUSTOM_SOURCEVIEW_SCHEME_PATH);
+
+//////////////////////////////////////////////////////////////////////////////
 
 function copyToClipboard(text) {
     const clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD);
     const textVariant = new GLib.Variant('s', text);
     clipboard.set_text(textVariant, -1);
     clipboard.store();
+}
+
+function substituteLang(str) {
+    const subs = [
+        { from: 'javascript', to: 'js' },
+    ];
+
+    for (const { from, to } of subs) {
+        if (from === str)
+            return to;
+    }
+
+    return str;
+}
+
+const HighlightedCode = (content, lang) => {
+    const buffer = new GtkSource.Buffer();
+    const sourceView = new GtkSource.View({
+        buffer: buffer,
+        wrap_mode: Gtk.WrapMode.WORD
+    });
+    const langManager = GtkSource.LanguageManager.get_default();
+    let displayLang = langManager.get_language(substituteLang(lang)); // Set your preferred language
+    if (displayLang) {
+        buffer.set_language(displayLang);
+    }
+    const schemeManager = GtkSource.StyleSchemeManager.get_default();
+    buffer.set_style_scheme(schemeManager.get_scheme(CUSTOM_SCHEME_ID));
+    buffer.set_text(content, -1);
+    return sourceView;
 }
 
 const TextBlock = (content = '') => Label({
@@ -41,7 +94,7 @@ const CodeBlock = (content = '', lang = 'txt') => {
                 className: 'sidebar-chat-codeblock-topbar-btn',
                 onClicked: (self) => {
                     // execAsync(['bash', '-c', `wl-copy '${content}'`, `&`]).catch(print);
-                    execAsync([`wl-copy`, `${code.label}`]).catch(print);
+                    execAsync([`wl-copy`, `${sourceView.label}`]).catch(print);
                 },
                 child: Box({
                     className: 'spacing-h-5',
@@ -55,32 +108,33 @@ const CodeBlock = (content = '', lang = 'txt') => {
             })
         ]
     })
-    // let sourceBuffer = new Gtk.Source.Buffer();
-    // let sourceView = new GtkSource.View({ buffer: sourceBuffer });
-    // sourceBuffer.set_language(GtkSource.LanguageManager.get_default().get_language('javascript'));
-    const code = Label({ // TODO: Make this in a scrolled window, add copy button etc.
-        hpack: 'fill',
-        className: 'txt txt-smaller sidebar-chat-codeblock-code',
-        useMarkup: false,
-        xalign: 0,
-        wrap: true,
-        selectable: true,
-        label: content,
-    })
+    // Source view
+    const sourceView = HighlightedCode(content, lang);
+
     const codeBlock = Box({
         properties: [
             ['updateText', (text) => {
-                code.label = text;
+                sourceView.get_buffer().set_text(text, -1);
             }]
         ],
         className: 'sidebar-chat-codeblock',
         vertical: true,
         children: [
             topBar,
-            code,
-            // sourceView,
+            Box({
+                className: 'sidebar-chat-codeblock-code',
+                homogeneous: true,
+                children: [sourceView,],
+            })
         ]
     })
+
+    // const schemeIds = styleManager.get_scheme_ids();
+
+    // print("Available Style Schemes:");
+    // for (let i = 0; i < schemeIds.length; i++) {
+    //     print(schemeIds[i]);
+    // }
     return codeBlock;
 }
 
