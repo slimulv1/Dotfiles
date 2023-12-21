@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo 'Hi there!'
-echo 'This script 1. will uninstall [end-4/dots-hyprland > illogical-impulse] dotfiles'
+echo 'This script 1. will uninstall dotfiles'
 echo '            2. will try to revert *mostly everything* installed using install.sh, so it'\''s pretty destructive'
 echo '            3. has not beed tested, use at your own risk.'
 echo '            4. will show all commands that it runs.'
@@ -39,8 +39,8 @@ echo 'User removed from video and input groups.'
 ##############################################################################################################################
 
 # Removing installed yay packages and dependencies
-echo 'yay -Rns adw-gtk3-git brightnessctl cava foot fuzzel gjs gojq gradience-git grim gtk-layer-shell gtklock gtklock-playerctl-module gtklock-powerbar-module gtklock-userinfo-module hyprland-git lexend-fonts-git libdbusmenu-gtk3 plasma-browser-integration playerctl python-build python-material-color-utilities python-poetry python-pywal ripgrep sassc slurp starship swayidle swaylock swww tesseract ttf-jetbrains-mono-nerd ttf-material-symbols-variable-git ttf-space-mono-nerd typescript webp-pixbuf-loader wl-clipboard wlogout yad ydotool'
-yay -Rns adw-gtk3-git brightnessctl cava foot fuzzel gjs gojq gradience-git grim gtk-layer-shell gtklock gtklock-playerctl-module gtklock-powerbar-module gtklock-userinfo-module hyprland-git lexend-fonts-git libdbusmenu-gtk3 plasma-browser-integration playerctl python-build python-material-color-utilities python-poetry python-pywal ripgrep sassc slurp starship swayidle swaylock swww tesseract ttf-jetbrains-mono-nerd ttf-material-symbols-variable-git ttf-space-mono-nerd typescript webp-pixbuf-loader wl-clipboard wlogout yad ydotool
+echo 'yay -Rns adw-gtk3-git brightnessctl cava foot fuzzel gjs gojq gradience-git grim gtk-layer-shell gtklock gtklock-playerctl-module gtklock-powerbar-module gtklock-userinfo-module hyprland-git lexend-fonts-git libdbusmenu-gtk3 plasma-browser-integration playerctl python-build python-material-color-utilities python-poetry python-pywal ripgrep sassc slurp starship swayidle swaylock-effects-git swww tesseract ttf-jetbrains-mono-nerd ttf-material-symbols-variable-git ttf-space-mono-nerd typescript webp-pixbuf-loader wl-clipboard wlogout yad ydotool'
+yay -Rns adw-gtk3-git brightnessctl cava foot fuzzel gjs gojq gradience-git grim gtk-layer-shell gtklock gtklock-playerctl-module gtklock-powerbar-module gtklock-userinfo-module hyprland-git lexend-fonts-git libdbusmenu-gtk3 plasma-browser-integration playerctl python-build python-material-color-utilities python-poetry python-pywal ripgrep sassc slurp starship swayidle swaylock-effects-git swww tesseract ttf-jetbrains-mono-nerd ttf-material-symbols-variable-git ttf-space-mono-nerd typescript webp-pixbuf-loader wl-clipboard wlogout yad ydotool
 
 
 echo 'Uninstall Complete.'
