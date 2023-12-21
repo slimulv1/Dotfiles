@@ -5,9 +5,9 @@ const { execAsync, exec } = Utils;
 import ChatGPT from '../../../services/chatgpt.js';
 import { MaterialIcon } from "../../../lib/materialicon.js";
 import { setupCursorHover, setupCursorHoverInfo } from "../../../lib/cursorhover.js";
-import { SystemMessage, ChatMessage } from "../chatmessage.js";
+import { SystemMessage, ChatMessage } from "./chatgpt_chatmessage.js";
 import { ConfigToggle } from '../../../lib/configwidgets.js';
-import { markdownTest } from '../md2pango.js';
+import { markdownTest } from '../../../lib/md2pango.js';
 
 export const chatGPTInfo = Box({
     vertical: true,
@@ -43,7 +43,7 @@ export const chatGPTInfo = Box({
                 Button({
                     className: 'txt-subtext txt-norm icon-material',
                     label: 'info',
-                    tooltipText: 'Uses the gpt-3.5-turbo.\nNot affiliated, endorsed, or sponsored by OpenAI.',
+                    tooltipText: 'Uses gpt-3.5-turbo.\nNot affiliated, endorsed, or sponsored by OpenAI.',
                     setup: setupCursorHoverInfo,
                 }),
             ]
@@ -80,7 +80,7 @@ export const chatGPTSettings = Revealer({
             ConfigToggle({
                 icon: 'description',
                 name: 'Assistant prompt',
-                desc: 'Tells ChatGPT\n  1. It\'s a sidebar assistant on Linux\n  2. Be short and concise\n  3. Use markdown features extensively\nTurn this off for a vanilla ChatGPT experience.',
+                desc: 'Tells ChatGPT\n  1. It\'s a sidebar assistant on Linux\n  2. Be short and concise\n  3. Use markdown features extensively\nLeave this off for a vanilla ChatGPT experience.',
                 initValue: ChatGPT.assistantPrompt,
                 onChange: (self, newValue) => {
                     ChatGPT.assistantPrompt = newValue;
@@ -169,7 +169,9 @@ export const chatGPTCommands = Box({
         Box({ hexpand: true }),
         Button({
             className: 'sidebar-chat-chip sidebar-chat-chip-action txt txt-small',
-            onClicked: () => chatEntry.text = '/key',
+            onClicked: () => chatContent.add(SystemMessage(
+                `Key stored in:\n\`${ChatGPT.keyPath}\`\nTo update this key, type \`/key YOUR_API_KEY\``,
+                '/key')),
             setup: setupCursorHover,
             label: '/key',
         }),
@@ -190,3 +192,34 @@ export const chatGPTCommands = Box({
         }),
     ]
 });
+
+export const chatGPTSendMessage = (text) => {
+    // Check if text or API key is empty
+    if (text.length == 0) return;
+    if (ChatGPT.key.length == 0) {
+        ChatGPT.key = text;
+        chatContent.add(SystemMessage(`Key saved to\n\`${ChatGPT.keyPath}\``, 'API Key'));
+        text = '';
+        return;
+    }
+    // Commands
+    if (text.startsWith('/')) {
+        if (text.startsWith('/clear')) ChatGPT.clear();
+        else if (text.startsWith('/model')) chatContent.add(SystemMessage(`Currently using \`${ChatGPT.modelName}\``, '/model'))
+        else if (text.startsWith('/key')) {
+            const parts = text.split(' ');
+            if (parts.length == 1) chatContent.add(SystemMessage(`Key stored in:\n\`${ChatGPT.keyPath}\`\nTo update this key, type \`/key YOUR_API_KEY\``, '/key'));
+            else {
+                ChatGPT.key = parts[1];
+                chatContent.add(SystemMessage(`Updated API Key at\n\`${ChatGPT.keyPath}\``, '/key'));
+            }
+        }
+        else if (text.startsWith('/test'))
+            chatContent.add(SystemMessage(markdownTest, `Markdown test`));
+        else
+            chatContent.add(SystemMessage(`Invalid command.`, 'Error'))
+    }
+    else {
+        ChatGPT.send(text);
+    }
+}

@@ -84,11 +84,11 @@ export const BluetoothIndicator = () => Widget.Stack({
 const NetworkWiredIndicator = () => Widget.Stack({
     transition: 'slide_up_down',
     items: [
+        ['fallback', SimpleNetworkIndicator()],
         ['unknown', Widget.Label({ className: 'txt-norm icon-material', label: 'wifi_off' })],
         ['disconnected', Widget.Label({ className: 'txt-norm icon-material', label: 'signal_wifi_off' })],
-        ['disabled', Widget.Label({ className: 'txt-norm icon-material', label: 'signal_wifi_statusbar_not_connected' })],
         ['connected', Widget.Label({ className: 'txt-norm icon-material', label: 'lan' })],
-        ['connecting', Widget.Label({ className: 'txt-norm icon-material', label: 'signal_wifi_0_bar' })],
+        ['connecting', Widget.Label({ className: 'txt-norm icon-material', label: 'settings_ethernet' })],
     ],
     connections: [[Network, stack => {
         if (!Network.wired)
@@ -97,11 +97,10 @@ const NetworkWiredIndicator = () => Widget.Stack({
         const { internet } = Network.wired;
         if (internet === 'connected' || internet === 'connecting')
             stack.shown = internet;
-
-        if (Network.connectivity !== 'full')
+        else if (Network.connectivity !== 'full')
             stack.shown = 'disconnected';
-
-        stack.shown = 'disabled';
+        else
+            stack.shown = 'fallback';
     }]],
 });
 
