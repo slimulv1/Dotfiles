@@ -1,6 +1,5 @@
 <div align="center">
     <h1>【 Slimulv1's dotfiles 】</h1>
-    <h3> Next-level hype with AGS </h3>
     <h3></h3>
 </div>
 <div align="center">
