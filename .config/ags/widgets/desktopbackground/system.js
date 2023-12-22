@@ -84,7 +84,7 @@ const distroAndVersion = Box({
                 Label({
                     className: 'bg-distro-txt',
                     xalign: 0,
-                    label: '「 米 」 Hyping on ',
+                    label: 'Hyping on ',
                 }),
                 Label({
                     className: 'bg-distro-name',
