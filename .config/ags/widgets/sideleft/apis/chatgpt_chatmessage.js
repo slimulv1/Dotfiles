@@ -214,7 +214,7 @@ const MessageContent = (content) => {
     return contentBox;
 }
 
-export const ChatMessage = (message) => {
+export const ChatMessage = (message, scrolledWindow) => {
     const messageContentBox = MessageContent(message.content);
     const thisMessage = Box({
         className: 'sidebar-chat-message',
@@ -243,7 +243,7 @@ export const ChatMessage = (message) => {
                     [message, (self) => { // Message update
                         messageContentBox._fullUpdate(messageContentBox, message.content, message.role != 'user');
                         Utils.timeout(MESSAGE_SCROLL_DELAY, () => {
-                            const scrolledWindow = thisMessage.get_parent().get_parent();
+                            if(!scrolledWindow) return;
                             var adjustment = scrolledWindow.get_vadjustment();
                             adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size());
                         });
@@ -258,7 +258,7 @@ export const ChatMessage = (message) => {
     return thisMessage;
 }
 
-export const SystemMessage = (content, commandName) => {
+export const SystemMessage = (content, commandName, scrolledWindow) => {
     const messageContentBox = MessageContent(content);
     const thisMessage = Box({
         className: 'sidebar-chat-message',
@@ -282,7 +282,7 @@ export const SystemMessage = (content, commandName) => {
             })
         ],
         setup: (self) => Utils.timeout(MESSAGE_SCROLL_DELAY, () => {
-            const scrolledWindow = thisMessage.get_parent().get_parent();
+            if(!scrolledWindow) return;
             var adjustment = scrolledWindow.get_vadjustment();
             adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size());
         })
