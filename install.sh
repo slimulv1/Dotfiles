@@ -45,7 +45,7 @@ echo "Step 1 Complete."
 echo '2. Installing AGS manually'
 sleep 1
 echo 'git clone --recursive https://github.com/Aylur/ags.git && cd ags'
-git clone --recursive https://github.com/Aylur/ags.git && cd ags || echo "failed to clone into ags. Aborting..." && exit
+git clone --recursive https://github.com/Aylur/ags.git && cd ags || echo "failed to clone into ags. Aborting..."
 echo "Done Cloning! Setting up npm and meson..."
 sleep 1
 echo 'npm install && meson setup build'
@@ -116,4 +116,6 @@ sh ./install.sh --sharp
 #####################################################################################
 
 echo 'Finished :)'
+sleep 1
+exit
 
