@@ -71,7 +71,7 @@ meson install -C build
 echo '6. Copying'
 
 echo 'cp -r "$HOME/dotfiles/.config/" "$HOME"'
-cp -r "$HOME/dotfiles/.config/" "$HOME" || echo "cp threw error. You could cp this yourself."
+cp -r "$HOME/dotfiles/.config/" "$HOME" || echo "cp threw error. You could cp this yourself. :)"
 echo 'cp -r $HOME/dotfiles/.local" "$HOME"'
 cp -r "$HOME/dotfiles/.local" "$HOME" || echo "cp threw error. You could cp this yourself."
 #####################################################################################
