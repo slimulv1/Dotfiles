@@ -24,11 +24,11 @@ echo '(Make sure you say yes when asked to use sudo here)'
 
 echo '2. Install some useful stuff'
 sleep 1
-echo 'sudo pacman -S vim network-manager-applet nm-connection-editor fcitx-unikey fcitx-im fcitx-ui-light kcm-fcitx fcitx-configtool fcitx-cloudpinyin nodejs npm systemd-resolvconf spotify-launcher discord trash-cli mono mono-msbuild'
-sudo pacman -S vim network-manager-applet nm-connection-editor fcitx-unikey fcitx-im fcitx-ui-light kcm-fcitx fcitx-configtool fcitx-cloudpinyin nodejs npm systemd-resolvconf spotify-launcher discord trash-cli mono mono-msbuild
+echo 'sudo pacman -S vim network-manager-applet nm-connection-editor fcitx-unikey fcitx-im fcitx-ui-light kcm-fcitx fcitx-configtool fcitx-cloudpinyin nodejs npm systemd-resolvconf spotify-launcher discord trash-cli mono mono-msbuild hyprshot'
+sudo pacman -S vim network-manager-applet nm-connection-editor fcitx-unikey fcitx-im fcitx-ui-light kcm-fcitx fcitx-configtool fcitx-cloudpinyin nodejs npm systemd-resolvconf spotify-launcher discord trash-cli mono mono-msbuild hyprshot
 echo '(Make sure you say yes when asked to use sudo here)'
-echo 'yay -S hyprshot neovim-git gitkraken linux-discord-rich-presence arrpc vscodium-bin vscodium-bin-marketplace vscodium-bin-features netcoredbg omnisharp-roslyn github-desktop-bin nwg-look vencord-desktop'
-yay -S hyprshot neovim-git gitkraken linux-discord-rich-presence arrpc vscodium-bin vscodium-bin-marketplace vscodium-bin-features netcoredbg omnisharp-roslyn github-desktop-bin nwg-look vencord-desktop
+echo 'yay -S neovim-git gitkraken linux-discord-rich-presence arrpc vscodium-bin vscodium-bin-marketplace vscodium-bin-features netcoredbg omnisharp-roslyn github-desktop-bin nwg-look vencord-desktop'
+yay -S neovim-git gitkraken linux-discord-rich-presence arrpc vscodium-bin vscodium-bin-marketplace vscodium-bin-features netcoredbg omnisharp-roslyn github-desktop-bin nwg-look vencord-desktop
 #####################################################################################
 
 echo '3. Get packages and add user to video/input groups'
