@@ -104,7 +104,8 @@ export const keybindList = [[
         "binds": [
             { "keys": ["", "+", "T"], "action": "Launch terminal: foot" },
             { "keys": ["", "+", "W"], "action": "Launch browser: Waterfox" },
-            { "keys": ["", "+", "D"], "action": "Launch editor: Discord" },
+            { "keys": ["", "Shift", "+", "D"], "action": "Launch editor: Discord" },
+            { "keys": ["", "+", "D"], "action": "Launch editor: Vencord" },
             { "keys": ["", "+", "S"], "action": "Launch editor: Spotify" },
             { "keys": ["", "+", "A"], "action": "Launch Game: An Anime Game Launcher" },
             { "keys": ["", "+", "C"], "action": "Launch editor: vscode" },
