@@ -86,9 +86,8 @@ echo 'sh ./install.sh -t all -N mojave'
 sh ./install.sh -t all -N mojave
 echo 'sh ./tweaks.sh -d -n -c Dark  -F -p 30 -i arch -f monterey'
 sh ./tweaks.sh -d -n -c Dark -p 30 -i arch -f monterey
-echo 'Fix for Flatpak gtk-4.0 app:'
-echo 'sudo flatpak override --filesystem=xdg-config/gtk-4.0' 
-sudo flatpak override --filesystem=xdg-config/gtk-4.0
+cd $HOME/Downloads/
+rm -rf WhiteSur-gtk-theme
 #####################################################################################
 
 echo 'Install WhiteSur-Icon-Theme'
@@ -99,6 +98,8 @@ echo 'git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git && cd Whi
 git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git && cd WhiteSur-icon-theme
 echo 'sh ./install.sh -b'
 sh ./install.sh -b
+cd $HOME/Downloads/
+rm -rf WhiteSur-icon-theme
 #####################################################################################
 
 echo 'Install WhiteSur-Kde-Theme'
