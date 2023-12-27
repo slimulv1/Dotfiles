@@ -76,7 +76,7 @@ echo 'cp -r $HOME/dotfiles/.local" "$HOME"'
 cp -r "$HOME/dotfiles/.local" "$HOME" || echo "cp threw error. You could cp this yourself."
 #####################################################################################
 
-echo 'Install WhiteSur-GTK-Theme'
+echo '7. Install WhiteSur-GTK-Theme'
 
 echo 'cd $HOME/Downloads/'
 cd $HOME/Downloads/
@@ -90,7 +90,7 @@ cd $HOME/Downloads/
 rm -rf WhiteSur-gtk-theme
 #####################################################################################
 
-echo 'Install WhiteSur-Icon-Theme'
+echo '8. Install WhiteSur-Icon-Theme'
 
 echo 'cd $HOME/Downloads/'
 cd $HOME/Downloads/
@@ -102,7 +102,7 @@ cd $HOME/Downloads/
 rm -rf WhiteSur-icon-theme
 #####################################################################################
 
-echo 'Install WhiteSur-Kde-Theme'
+echo '9. Install WhiteSur-Kde-Theme'
 
 echo 'Install Kvantum engine.'
 echo 'cd $HOME'
@@ -116,6 +116,8 @@ echo 'git clone https://github.com/vinceliuice/WhiteSur-kde.git && cd WhiteSur-k
 git clone https://github.com/vinceliuice/WhiteSur-kde.git && cd WhiteSur-kde
 echo 'sh ./install.sh --sharp'
 sh ./install.sh --sharp
+cd $HOME/Downloads/
+rm -rf WhiteSur-kde
 #####################################################################################
 
 echo 'Finished :)'
