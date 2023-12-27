@@ -36,12 +36,25 @@ echo '3. Get packages and add user to video/input groups'
 echo 'yay -S blueberry brightnessctl coreutils curl fish foot fuzzel gjs gnome-bluetooth-3.0 gnome-control-center gnome-keyring gobject-introspection grim gtk3 gtk-layer-shell libdbusmenu-gtk3 meson networkmanager npm plasma-browser-integration playerctl polkit-gnome python-pywal ripgrep sassc slurp starship swayidle swaylock-effects-git typescript upower xorg-xrandr webp-pixbuf-loader wget wireplumber wl-clipboard tesseract yad ydotool adw-gtk3-git cava gojq gradience-git gtklock gtklock-playerctl-module gtklock-powerbar-module gtklock-userinfo-module hyprland-git lexend-fonts-git python-material-color-utilities python-pywal python-poetry python-build python-pillow swww ttf-material-symbols-variable-git ttf-space-mono-nerd ttf-jetbrains-mono-nerd wayland-idle-inhibitor-git wlogout'
 yay -S blueberry brightnessctl coreutils curl fish foot fuzzel gjs gnome-bluetooth-3.0 gnome-control-center gnome-keyring gobject-introspection grim gtk3 gtk-layer-shell libdbusmenu-gtk3 meson networkmanager npm plasma-browser-integration playerctl polkit-gnome python-pywal ripgrep sassc slurp starship swayidle swaylock-effects-git typescript upower xorg-xrandr webp-pixbuf-loader wget wireplumber wl-clipboard tesseract yad ydotool adw-gtk3-git cava gojq gradience-git gtklock gtklock-playerctl-module gtklock-powerbar-module gtklock-userinfo-module hyprland-git lexend-fonts-git python-material-color-utilities python-pywal python-poetry python-build python-pillow swww ttf-material-symbols-variable-git ttf-space-mono-nerd ttf-jetbrains-mono-nerd wayland-idle-inhibitor-git wlogout
 
+echo 'Enable Rich Precense (discord rpc)'
+
+echo 'ln -sf $XDG_RUNTIME_DIR/{app/com.discordapp.Discord,}/discord-ipc-0 '
+ln -sf $XDG_RUNTIME_DIR/{app/com.discordapp.Discord,}/discord-ipc-0 
+echo 'mkdir -p ~/.config/user-tmpfiles.d'
+mkdir -p ~/.config/user-tmpfiles.d
+echo 'echo 'L %t/discord-ipc-0 - - - - app/com.discordapp.Discord/discord-ipc-0' > ~/.config/user-tmpfiles.d/discord-rpc.conf'
+echo 'L %t/discord-ipc-0 - - - - app/com.discordapp.Discord/discord-ipc-0' > ~/.config/user-tmpfiles.d/discord-rpc.conf
+echo 'systemctl --user enable --now systemd-tmpfiles-setup.service'
+systemctl --user enable --now systemd-tmpfiles-setup.service
+#####################################################################################
+
 echo "sudo usermod -aG video $user"
 sudo usermod -aG video "$user" || echo "failed to add user to video group"
 echo "sudo usermod -aG input $user"
 sudo usermod -aG input "$user" || echo "failed to add user to input group"
 echo "Step 1 Complete."
 #####################################################################################
+
 echo '2. Installing AGS manually'
 sleep 1
 echo 'git clone --recursive https://github.com/Aylur/ags.git && cd ags'
@@ -63,17 +76,6 @@ echo 'cp -r $HOME/Downloads/dotfiles/.local" "$HOME"'
 cp -r "$HOME/Downloads/dotfiles/.local" "$HOME" || echo "cp threw error. You could cp this yourself."
 #####################################################################################
 
-echo 'Enable Rich Precense (discord rpc)'
-
-echo 'ln -sf $XDG_RUNTIME_DIR/{app/com.discordapp.Discord,}/discord-ipc-0 '
-ln -sf $XDG_RUNTIME_DIR/{app/com.discordapp.Discord,}/discord-ipc-0 
-echo 'mkdir -p ~/.config/user-tmpfiles.d'
-mkdir -p ~/.config/user-tmpfiles.d
-echo 'echo 'L %t/discord-ipc-0 - - - - app/com.discordapp.Discord/discord-ipc-0' > ~/.config/user-tmpfiles.d/discord-rpc.conf'
-echo 'L %t/discord-ipc-0 - - - - app/com.discordapp.Discord/discord-ipc-0' > ~/.config/user-tmpfiles.d/discord-rpc.conf
-echo 'systemctl --user enable --now systemd-tmpfiles-setup.service'
-systemctl --user enable --now systemd-tmpfiles-setup.service
-#####################################################################################
 echo 'Install WhiteSur-GTK-Theme'
 
 echo 'cd $HOME/Downloads/'
