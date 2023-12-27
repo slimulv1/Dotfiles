@@ -85,7 +85,7 @@ git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git --depth=1 && cd 
 echo 'sh ./install.sh -t all -N mojave'
 sh ./install.sh -t all -N mojave
 echo 'sh ./tweaks.sh -d -n -c Dark  -F -p 30 -i arch -f monterey'
-sh ./tweaks.sh -d -n -c Dark  -F -p 30 -i arch -f monterey
+sh ./tweaks.sh -d -n -c Dark -p 30 -i arch -f monterey
 echo 'Fix for Flatpak gtk-4.0 app:'
 echo 'sudo flatpak override --filesystem=xdg-config/gtk-4.0' 
 sudo flatpak override --filesystem=xdg-config/gtk-4.0
