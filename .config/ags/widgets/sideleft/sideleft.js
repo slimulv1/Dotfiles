@@ -172,6 +172,8 @@ export default () => Box({
                 if (event.get_keyval()[1] == Gdk.KEY_p)
                     pinButton._toggle(pinButton);
                 // Switch sidebar tab
+                else if (event.get_keyval()[1] === Gdk.KEY_Tab)
+                    switchToTab((currentTabId + 1) % contents.length);
                 else if (event.get_keyval()[1] === Gdk.KEY_Page_Up)
                     switchToTab(Math.max(currentTabId - 1), 0);
                 else if (event.get_keyval()[1] === Gdk.KEY_Page_Down)
@@ -179,8 +181,14 @@ export default () => Box({
             }
             if (contentStack.shown == 'apis') { // If api tab is focused
                 // Automatically focus entry when typing
-                if (event.get_keyval()[1] >= 32 && event.get_keyval()[1] <= 126 &&
-                    widget != chatEntry && event.get_keyval()[1] != Gdk.KEY_space) {
+                if ((
+                    !(event.get_state()[1] & Gdk.ModifierType.CONTROL_MASK) &&
+                    event.get_keyval()[1] >= 32 && event.get_keyval()[1] <= 126 &&
+                    widget != chatEntry && event.get_keyval()[1] != Gdk.KEY_space)
+                    ||
+                    ((event.get_state()[1] & Gdk.ModifierType.CONTROL_MASK) && 
+                    event.get_keyval()[1] === Gdk.KEY_v)
+                ) {
                     chatEntry.grab_focus();
                     chatEntry.set_text(chatEntry.text + String.fromCharCode(event.get_keyval()[1]));
                     chatEntry.set_position(-1);
