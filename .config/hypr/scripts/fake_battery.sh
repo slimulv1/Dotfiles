@@ -1,6 +1,6 @@
 #!/bin/bash
 me=$(whoami)
-cd /home/$me/Downloads/linux-fake-battery-module/
+cd /home/$me/linux-fake-battery-module/
 echo My7skjawwaqert | sudo -S insmod ./fake_battery.ko
 echo 'charging = 1' | sudo tee /dev/fake_battery
 echo 'capacity0 = 88' | sudo tee /dev/fake_battery
