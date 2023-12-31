@@ -4,8 +4,8 @@ import { App, Utils } from './imports.js';
 // Widgets
 import Bar from './widgets/bar/main.js';
 import Cheatsheet from './widgets/cheatsheet/main.js';
-import DesktopBackground from './widgets/desktopbackground/main.js';
-import Dock from './widgets/dock/main.js';
+// import DesktopBackground from './widgets/desktopbackground/main.js';
+// import Dock from './widgets/dock/main.js';
 import { CornerTopleft, CornerTopright, CornerBottomleft, CornerBottomright } from './widgets/screencorners/main.js';
 import Indicator from './widgets/indicators/main.js';
 import Osk from './widgets/onscreenkeyboard/main.js';
@@ -16,7 +16,7 @@ import SideRight from './widgets/sideright/main.js';
 
 const CLOSE_ANIM_TIME = 210; // Longer than actual anim time (see styles) to make sure widgets animate fully
 
-// Init cache and check first run
+// Init cache
 Utils.exec(`bash -c 'mkdir -p ~/.cache/ags/user/colorschemes'`);
 // SCSS compilation
 Utils.exec(`bash -c 'echo "" > ${App.configDir}/scss/_musicwal.scss'`); // reset music styles
@@ -39,13 +39,12 @@ export default {
         'osk': CLOSE_ANIM_TIME,
     },
     windows: [
-        // Bar() is below
         CornerTopleft(),
         CornerTopright(),
         CornerBottomleft(),
         CornerBottomright(),
-        DesktopBackground(),
-        Dock(), // Buggy
+        // DesktopBackground(),
+        // Dock(), // Buggy
         Overview(),
         Indicator(),
         Cheatsheet(),
@@ -53,6 +52,6 @@ export default {
         SideRight(),
         Osk(), // On-screen keyboard
         Session(), // Power menu, if that's what you like to call it
-        Bar()
+        Bar(),
     ],
 };
