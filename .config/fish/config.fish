@@ -11,13 +11,10 @@ if status is-interactive
     set fish_greeting
 
 end
-alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+
 starship init fish | source
 
 # function fish_prompt
 #   set_color cyan; echo (pwd) 
 #   set_color green; echo '> '
 # end
-function update-ags
-    sh ~/.config/hypr/scripts/update-ags.sh
-end
