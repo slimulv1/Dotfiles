@@ -1,9 +1,20 @@
+const { Gdk, Gio, GLib } = imports.gi;
 import { Utils, Widget } from '../imports.js';
 import Service from 'resource:///com/github/Aylur/ags/service.js';
-import Gio from 'gi://Gio';
-import GLib from 'gi://GLib';
-import Soup from 'gi://Soup?version=3.0';
-import { fileExists } from './messages.js';
+
+// Usage from my python waifu fetcher, for reference
+// Usage: waifu-get.py [OPTION]... [TAG]...
+// Options:
+//     --im\tUse waifu.im API. You can use many tags
+//     --pics\tUse waifu.pics API. Use 1 tag only.
+//     --nekos\tUse nekos.life (old) API. No tags.
+//     --segs\tForce NSFW images
+
+// Tags:
+//     waifu.im (type):
+//         maid waifu marin-kitagawa mori-calliope raiden-shogun oppai selfies uniform
+//     waifu.im (nsfw tags):
+//         ecchi hentai ero ass paizuri oral milf
 
 function paramStringFromObj(params) {
     return Object.entries(params)
@@ -38,6 +49,7 @@ class WaifuService extends Service {
     _queries = [];
     _nsfw = false;
     _minHeight = 600;
+    _status = 0;
 
     static {
         Service.register(this, {
@@ -69,31 +81,51 @@ class WaifuService extends Service {
     get queries() { return this._queries }
     get responses() { return this._responses }
 
-    fetch(msg) {
-        const newMessageId = this._responses.length;
-        const taglist = msg.split(' ');
+    async fetch(msg) {
+        // Init
+        const userArgs = msg.split(' ');
+        let taglist = [];
+        this._nsfw = false;
+        // Construct body/headers
+        for (let i = 0; i < userArgs.length; i++) {
+            const thisArg = userArgs[i];
+            if (thisArg == '--im') this._mode = 'im';
+            else if (thisArg == '--nekos') this._mode = 'nekos';
+            else if (thisArg.includes('pics')) this._mode = 'pics';
+            else if (thisArg.includes('segs') || thisArg.includes('sex') || thisArg.includes('lewd')) this._nsfw = true;
+            else {
+                taglist.push(thisArg);
+                if(['ecchi', 'hentai', 'ero', 'ass', 'paizuri', 'oral', 'milf'].includes(thisArg)) this._nsfw = true;
+            }
+        }
+        const newMessageId = this._queries.length;
         this._queries.push(taglist);
         this.emit('newResponse', newMessageId);
-        // Construct body/headers
         const params = {
             'included_tags': taglist,
             'height': `>=${this._minHeight}`,
             'nsfw': this._nsfw,
         };
         const paramString = paramStringFromObj(params);
-        console.log(paramString);
         // Fetch
-        const options = {
+        // Note: body isn't included since passing directly to url is more reliable
+        const options = { 
             method: 'GET',
             headers: this._headers[this._mode],
         };
-        Utils.fetch(`${this._baseUrl}?${paramString}`, options)
-            .then(result => result.text()) // Parse
+        var status = 0;
+        Utils.fetch(`${this._endpoints[this._mode]}?${paramString}`, options)
+            .then(result => {
+                status = result.status;
+                return result.text();
+            })
             .then((dataString) => { // Store interesting stuff and emit
                 const parsedData = JSON.parse(dataString);
                 if (!parsedData.images) this._responses.push({
+                    status: status,
                     signature: -1,
                     url: '',
+                    extension: '',
                     source: '',
                     dominant_color: '#383A40',
                     is_nsfw: false,
@@ -104,10 +136,12 @@ class WaifuService extends Service {
                 else {
                     const imageData = parsedData.images[0];
                     this._responses.push({
+                        status: status,
                         signature: imageData?.signature || -1,
                         url: imageData?.url || undefined,
+                        extension: imageData.extension,
                         source: imageData?.source,
-                        dominant_color: imageData?.dominant_color || '#000000',
+                        dominant_color: imageData?.dominant_color || '#9392A6',
                         is_nsfw: imageData?.is_nsfw || false,
                         width: imageData?.width || 0,
                         height: imageData?.height || 0,

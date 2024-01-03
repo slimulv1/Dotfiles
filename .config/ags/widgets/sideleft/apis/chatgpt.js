@@ -8,7 +8,7 @@ import { setupCursorHover, setupCursorHoverInfo } from "../../../lib/cursorhover
 import { SystemMessage, ChatMessage } from "./chatgpt_chatmessage.js";
 import { ConfigToggle, ConfigSegmentedSelection, ConfigGap } from '../../../lib/configwidgets.js';
 import { markdownTest } from '../../../lib/md2pango.js';
-import { MarginRevealer } from '../../../lib/advancedrevealers.js';
+import { MarginRevealer } from '../../../lib/advancedwidgets.js';
 
 export const chatGPTTabIcon = Box({
     hpack: 'center',
@@ -66,10 +66,10 @@ export const chatGPTSettings = MarginRevealer({
     revealChild: true,
     connections: [
         [ChatGPT, (self) => Utils.timeout(200, () => {
-            self._hide(self);
+            self._hide();
         }), 'newMsg'],
         [ChatGPT, (self) => Utils.timeout(200, () => {
-            self._show(self);
+            self._show();
         }), 'clear'],
     ],
     child: Box({
@@ -200,6 +200,11 @@ export const chatGPTView = Scrollable({
         Utils.timeout(1, () => { 
             const viewport = scrolledWindow.child;
             viewport.set_focus_vadjustment(new Gtk.Adjustment(undefined));
+        })
+        // Always scroll to bottom with new content
+        const adjustment = scrolledWindow.get_vadjustment();
+        adjustment.connect("changed", () => {
+            adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size());
         })
     }
 });
