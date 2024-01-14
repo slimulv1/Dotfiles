@@ -4,4 +4,4 @@ cava pavucontrol wireplumber libdbusmenu-gtk3 plasma-browser-integration playerc
 webp-pixbuf-loader gtk-layer-shell gtk3 gobject-introspection upower fuzzel yad ydotool
 polkit-gnome gnome-keyring gnome-control-center blueberry networkmanager brightnessctl wlsunset-git gnome-bluetooth-3.0
 wayland-idle-inhibitor-git swayidle swaylock-effects-git wlogout wl-clipboard hyprpicker-git grim tesseract slurp
-adw-gtk3-git gradience-git swww fontconfig lexend-fonts-git ttf-jetbrains-mono-nerd ttf-material-symbols-variable-git ttf-space-mono-nerd fish foot starship
+adw-gtk3-git gradience-git swww fontconfig lexend-fonts-git ttf-jetbrains-mono-nerd ttf-material-symbols-variable-git ttf-space-mono-nerd fish foot starship lib32-mesa xf86-video-amdgpu vulkan-radeon amdvlk lib32-vulkan-radeon libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau
