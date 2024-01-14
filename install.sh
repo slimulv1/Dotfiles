@@ -130,12 +130,6 @@ else
   v yay -S --needed --noconfirm "${pkglist[*]}"
 fi
 
-printf '\e[36m1. Check graphics card you have \n\e[97m'
-v lspci -k | grep -A 2 -E "(VGA|3D)"
-printf '\e[36m1. 1. Install Graphic Driver \n\e[97m'
-v sudo pacman -S lib32-mesa xf86-video-amdgpu vulkan-radeon amdvlk lib32-vulkan-radeon libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau  
-#####################################################################################
-
 v sudo usermod -aG video "$(whoami)"
 v sudo usermod -aG input "$(whoami)"
 
@@ -223,6 +217,12 @@ printf "\e[36m[$0]: 3. Copying\e[97m\n"
 
 # In case ~/.local/bin does not exists
 v mkdir -p "$HOME/.local/bin" "$HOME/.local/share"
+
+printf '\e[36m1. Check graphics card you have \n\e[97m'
+v lspci -k | grep -A 2 -E "(VGA|3D)"
+printf '\e[36m1. 1. Install Graphic Driver \n\e[97m'
+v sudo pacman -S lib32-mesa xf86-video-amdgpu vulkan-radeon amdvlk lib32-vulkan-radeon libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau  
+#####################################################################################
 
 # `--delete' for rsync to make sure that
 # original dotfiles and new ones in the SAME DIRECTORY
