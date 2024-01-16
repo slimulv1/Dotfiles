@@ -5,6 +5,7 @@ export const keybindList = [[
         "binds": [
             { "keys": ["", "+", "#"], "action": "Go to workspace #" },
             { "keys": ["", "+", "S"], "action": "Toggle special workspace" },
+            { "keys": ["", "Shift", "+", "A"], "action": "Toggle Floating" },
             { "keys": ["", "+", "(Scroll ↑↓)"], "action": "Go to workspace -1/+1" },
             { "keys": ["Ctrl", "", "+", "←"], "action": "Go to workspace on the left" },
             { "keys": ["Ctrl", "", "+", "→"], "action": "Go to workspace on the right" },
@@ -36,8 +37,7 @@ export const keybindList = [[
             { "keys": ["", "+", "Mmb"], "action": "Move window" },
             { "keys": ["", "+", "Rmb"], "action": "Resize window" },
             { "keys": ["", "+", "F"], "action": "Fullscreen" },
-            { "keys": ["", "Alt", "+", "F"], "action": "Fake fullscreen" },
-            { "keys": ["", "Shift", "+", "A"], "action": "Toggle Floating" }
+            { "keys": ["", "Alt", "+", "F"], "action": "Fake fullscreen" }
         ],
         "appeartick": 1
     }
