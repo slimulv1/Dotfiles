@@ -105,12 +105,10 @@ export const keybindList = [[
         "binds": [
             { "keys": ["", "+", "T"], "action": "Launch terminal: foot" },
             { "keys": ["", "+", "W"], "action": "Launch browser: Waterfox" },
-            { "keys": ["", "Shift", "+", "D"], "action": "Launch editor: Discord" },
-            { "keys": ["", "+", "D"], "action": "Launch editor: Vencord" },
-            { "keys": ["", "+", "S"], "action": "Launch editor: Spotify" },
-            { "keys": ["", "+", "H"], "action": "Launch Game: An Anime Game Launcher" },
+            { "keys": ["", "+", "U"], "action": "Launch Franz" },
+            { "keys": ["", "+", "D"], "action": "Launch Discord" },
+            { "keys": ["", "+", "Y"], "action": "Launch editor: Spotify" },
             { "keys": ["", "+", "C"], "action": "Launch editor: vscode" },
-            { "keys": ["", "+", "X"], "action": "Launch editor: GNOME Text Editor" },
             { "keys": ["", "+", "I"], "action": "Launch settings: GNOME Control center" }
         ],
         "appeartick": 3
