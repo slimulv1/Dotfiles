@@ -69,11 +69,12 @@ function getTrackfont(player) {
     return DEFAULT_MUSIC_FONT;
 }
 function trimTrackTitle(title) {
+    if(!title) return '';
     const cleanRegexes = [
         /【[^】]*】/,         // Touhou n weeb stuff
         /\[FREE DOWNLOAD\]/, // F-777
     ];
-    cleanRegexes.forEach((expr) => cleanedTitle.replace(expr, ''));
+    cleanRegexes.forEach((expr) => title.replace(expr, ''));
     return title;
 }
 
