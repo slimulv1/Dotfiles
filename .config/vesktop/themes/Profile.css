@@ -1,0 +1,35 @@
+[class*=profileColors_] {
+    --profile-body-background-color: transparent !important;
+}
+
+/* color banner */
+[class*=popoutBanner_],
+[class*=profileBanner_],
+[class*=popoutNoBannerPremium_] {
+    display: none;
+}
+
+[class*=panelBanner_],
+[class*=bannerNormal_] {
+    background-color: transparent !important;
+}
+
+/* long bio */
+[class*=lineClamp2Plus_] {
+    display: block;
+}
+
+/* old twitter */
+[src*="/assets/f47485602365c946fa52.svg"] {
+    content: url("https://discord.com//assets/57a3fe2c0e62e98937fd.svg");
+}
+
+/* shorter account panel */
+#account {
+    height: 76px;
+}
+
+#account>div>[class*=separator_],
+[class*=divider_]:has(+#account) {
+    display: none;
+}
