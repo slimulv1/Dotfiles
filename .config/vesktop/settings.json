@@ -3,7 +3,7 @@
     "discordBranch": "stable",
     "arRPC": "on",
     "splashColor": "rgb(219, 222, 225)",
-    "splashBackground": "rgb(49, 51, 56)",
+    "splashBackground": "rgb(30, 31, 34)",
     "staticTitle": true,
     "enableMenu": true
 }
