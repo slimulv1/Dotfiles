@@ -80,7 +80,7 @@ function trimTrackTitle(title) {
 
 const TrackProgress = ({ player, ...rest }) => {
     const _updateProgress = (circprog) => {
-        const player = Mpris.getPlayer();
+        // const player = Mpris.getPlayer();
         if (!player) return;
         // Set circular progress (see definition of AnimatedCircProg for explanation)
         circprog.css = `font-size: ${Math.max(player.position / player.length * 100, 0)}px;`
@@ -139,9 +139,7 @@ const CoverArt = ({ player, ...rest }) => Box({
                 Box({
                     attribute: {
                         'updateCover': (self) => {
-                            const player = Mpris.getPlayer();
-                            console.log('cover!');
-
+                            // const player = Mpris.getPlayer(); // Maybe no need to re-get player.. can't remember why I had this
                             // Player closed
                             // Note that cover path still remains, so we're checking title
                             if (!player || player.trackTitle == "") {
@@ -219,7 +217,7 @@ const TrackControls = ({ player, ...rest }) => Widget.Revealer({
         ],
     }),
     setup: (self) => self.hook(Mpris, (self) => {
-        const player = Mpris.getPlayer();
+        // const player = Mpris.getPlayer();
         if (!player)
             self.revealChild = false;
         else
@@ -267,7 +265,7 @@ const TrackTime = ({ player, ...rest }) => {
             children: [
                 Label({
                     setup: (self) => self.poll(1000, (self) => {
-                        const player = Mpris.getPlayer();
+                        // const player = Mpris.getPlayer();
                         if (!player) return;
                         self.label = lengthStr(player.position);
                     }),
@@ -275,7 +273,7 @@ const TrackTime = ({ player, ...rest }) => {
                 Label({ label: '/' }),
                 Label({
                     setup: (self) => self.hook(Mpris, (self) => {
-                        const player = Mpris.getPlayer();
+                        // const player = Mpris.getPlayer();
                         if (!player) return;
                         self.label = lengthStr(player.length);
                     }),
@@ -353,30 +351,16 @@ export default () => Revealer({
     revealChild: false,
     child: Box({
         setup: (self) => self.hook(Mpris, box => {
-            let foundPlayer = false;
+            box.children.forEach(child => {
+                child.destroy();
+                child = null;
+            });
             Mpris.players.forEach((player, i) => {
                 if (isRealPlayer(player)) {
-                    console.log('Found player', player);
-                    foundPlayer = true;
-                    box.children.forEach(child => {
-                        child.destroy();
-                        child = null;
-                    });
                     const newInstance = MusicControlsWidget(player);
-                    box.children = [newInstance];
+                    box.add(newInstance);
                 }
             });
-
-            if (!foundPlayer) {
-                console.log('No players found');
-                const children = box.get_children();
-                for (let i = 0; i < children.length; i++) {
-                    const child = children[i];
-                    child.destroy();
-                    child = null;
-                }
-                return;
-            }
         }, 'notify::players'),
     }),
     setup: (self) => self.hook(showMusicControls, (revealer) => {
@@ -394,7 +378,6 @@ export default () => Revealer({
 //             let foundPlayer = false;
 //             Mpris.players.forEach((player, i) => {
 //                 if (isRealPlayer(player)) {
-//                     console.log('Found player', player);
 //                     foundPlayer = true;
 //                     box.children.forEach(child => {
 //                         child.destroy();
@@ -406,7 +389,6 @@ export default () => Revealer({
 //             });
 
 //             if (!foundPlayer) {
-//                 console.log('No players found');
 //                 const children = box.get_children();
 //                 for (let i = 0; i < children.length; i++) {
 //                     const child = children[i];
