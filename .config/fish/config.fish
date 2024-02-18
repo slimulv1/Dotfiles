@@ -17,6 +17,8 @@ if test -f ~/.cache/ags/user/colorschemes/sequences
     cat ~/.cache/ags/user/colorschemes/sequences
 end
 
+alias pamcan=pacman
+
 # function fish_prompt
 #   set_color cyan; echo (pwd)
 #   set_color green; echo '> '
