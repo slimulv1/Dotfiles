@@ -5,6 +5,7 @@ export const keybindList = [[
         "binds": [
             { "keys": ["", "+", "#"], "action": "Go to workspace #" },
             { "keys": ["", "+", "S"], "action": "Toggle special workspace" },
+            { "keys": ["", "Shift", "+", "A"], "action": "Toggle Floating" },
             { "keys": ["", "+", "(Scroll ↑↓)"], "action": "Go to workspace -1/+1" },
             { "keys": ["Ctrl", "", "+", "←"], "action": "Go to workspace on the left" },
             { "keys": ["Ctrl", "", "+", "→"], "action": "Go to workspace on the right" },
@@ -72,6 +73,7 @@ export const keybindList = [[
         "name": "Utilities",
         "binds": [
             { "keys": ["PrtSc"], "action": "Screenshot  >>  clipboard" },
+            { "keys": ["", "+", "X"], "action": "Screenshot  >>  clipboard" },
             { "keys": ["", "Shift", "+", "S"], "action": "Screen snip  >>  clipboard" },
             { "keys": ["", "Shift", "+", "T"], "action": "Image to text  >>  clipboard" },
             { "keys": ["", "Shift", "+", "C"], "action": "Color picker" },
@@ -102,9 +104,11 @@ export const keybindList = [[
         "name": "Apps",
         "binds": [
             { "keys": ["", "+", "T"], "action": "Launch terminal: foot" },
-            { "keys": ["", "+", "W"], "action": "Launch browser: Firefox" },
+            { "keys": ["", "+", "W"], "action": "Launch browser: Waterfox" },
+            { "keys": ["", "+", "U"], "action": "Launch Franz" },
+            { "keys": ["", "+", "D"], "action": "Launch Discord" },
+            { "keys": ["", "+", "Y"], "action": "Launch editor: Spotify" },
             { "keys": ["", "+", "C"], "action": "Launch editor: vscode" },
-            { "keys": ["", "+", "X"], "action": "Launch editor: GNOME Text Editor" },
             { "keys": ["", "+", "I"], "action": "Launch settings: GNOME Control center" }
         ],
         "appeartick": 3
