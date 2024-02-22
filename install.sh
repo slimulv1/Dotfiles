@@ -3,6 +3,7 @@ cd "$(dirname "$0")"
 export base="$(pwd)"
 source ./scriptdata/functions
 source ./scriptdata/installers
+source ./scriptdata/options
 
 #####################################################################################
 if ! command -v pacman >/dev/null 2>&1;then printf "\e[31m[$0]: pacman not found, it seems that the system is not ArchLinux or Arch-based distros. Aborting...\e[0m\n";exit 1;fi
@@ -26,12 +27,12 @@ read -p "====> " p
 case $p in
   y)ask=true;;
   n)ask=false;;
-  *)exit;;
+  *)exit 1;;
 esac
 }
 
-case $1 in
-  "-f")ask=false;;
+case $ask in
+  false)sleep 0;;
   *)startask ;;
 esac
 
@@ -146,7 +147,7 @@ done
 v rsync -av ".local/bin/" "$HOME/.local/bin/"
 
 # Prevent hyprland from not fully loaded
-sleep 2
+sleep 1
 try hyprctl reload
 #####################################################################################
 printf "\e[36m[$0]: Finished. See the \"Import Manually\" folder and grab anything you need.\e[97m\n"
