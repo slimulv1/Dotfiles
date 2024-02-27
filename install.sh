@@ -119,6 +119,23 @@ if $(test -d /usr/local/share/icons/OneUI); then
 else ask_OneUI=true
 fi
 if $ask_OneUI;then showfun install-OneUI;v install-OneUI;fi
+
+if $(test -d /usr/local/share/icons/Bibata-Modern-Classic); then
+  echo -e "\e[33m[$0]: Cursor theme \"Bibata-Modern-Classic\" already exists, no need to install.\e[0m"
+  echo -e "\e[34mYou can reinstall it in order to update to the latest version anyway.\e[0m"
+  ask_bibata=$ask
+else ask_bibata=true
+fi
+if $ask_bibata;then showfun install-bibata;v install-bibata;fi
+
+if command -v LaTeX >/dev/null 2>&1;then
+  echo -e "\e[33m[$0]: Program \"MicroTeX\" already exists, no need to install.\e[0m"
+  echo -e "\e[34mYou can reinstall it in order to update to the latest version anyway.\e[0m"
+  ask_MicroTeX=$ask
+else ask_MicroTeX=true
+fi
+if $ask_MicroTeX;then showfun install-MicroTeX;v install-MicroTeX;fi
+
 #####################################################################################
 printf "\e[36m[$0]: 3. Copying\e[97m\n"
 
