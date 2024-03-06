@@ -1,7 +1,7 @@
-<div align="center">
-    <h1>【 Slimulv1's dotfiles 】</h1>
-    <h3></h3>
-</div>
+<h3 align="center">
+	<img src="https://styles.redditmedia.com/t5_6sciw0/styles/communityIcon_h3cvittvupi91.png" width="100" alt="Logo"/><br/>
+	Dots for <a href="https://hyprland.org/">Hyprland</a>
+</h3>
 <div align="center">
 
 ![](https://img.shields.io/github/last-commit/slimulv1/dotfiles?&style=for-the-badge&color=7C4DFF&logoColor=D9E0EE&labelColor=292324)
