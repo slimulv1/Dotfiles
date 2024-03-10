@@ -105,8 +105,9 @@ export const keybindList = [[
         "binds": [
             { "keys": ["", "+", "T"], "action": "Launch terminal: foot" },
             { "keys": ["", "+", "W"], "action": "Launch browser: Floorp" },
-            { "keys": ["", "+", "H"], "action": "Launch github desktop" },
+            { "keys": ["", "+", "H"], "action": "Launch Github desktop" },
             { "keys": ["", "+", "D"], "action": "Launch Discord" },
+            { "keys": ["", "+", "U"], "action": "Launch Telegram" },
             { "keys": ["", "+", "Y"], "action": "Launch editor: Spotify" },
             { "keys": ["", "+", "C"], "action": "Launch editor: vscode" },
             { "keys": ["", "+", "I"], "action": "Launch settings: GNOME Control center" }
