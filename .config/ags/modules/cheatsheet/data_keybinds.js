@@ -92,10 +92,12 @@ export const keybindList = [[
             { "keys": ["", "+", "T"], "action": "Launch terminal: foot" },
             { "keys": ["", "+", "W"], "action": "Launch browser: Floorp" },
             { "keys": ["", "+", "H"], "action": "Launch Github desktop" },
-            { "keys": ["", "+", "D"], "action": "Launch Discord" },
+            { "keys": ["", "+", "J"], "action": "Launch Bitwarden" },
+            { "keys": ["", "+", "D"], "action": "Launch Vesktop" },
             { "keys": ["", "+", "U"], "action": "Launch Telegram" },
             { "keys": ["", "+", "Y"], "action": "Launch editor: Spotify" },
             { "keys": ["", "+", "C"], "action": "Launch editor: vscode" },
+            { "keys": ["", "+", "O"], "action": "Launch Osu Lazer" },
             { "keys": ["", "+", "I"], "action": "Launch settings: GNOME Control center" }
         ],
         "id": 6
