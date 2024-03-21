@@ -23,3 +23,10 @@ alias pamcan=pacman
 #   set_color cyan; echo (pwd)
 #   set_color green; echo '> '
 # end
+function pokemon 
+     pokemon-colorscripts -n 
+end
+
+function fish_greeting
+     pokemon-colorscripts -n arceus
+end
