@@ -8,7 +8,7 @@ end
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
-    set fish_greeting
+    set fish_greeting 
 
 end
 
@@ -23,10 +23,6 @@ alias pamcan=pacman
 #   set_color cyan; echo (pwd)
 #   set_color green; echo '> '
 # end
-function pokemon 
-     pokemon-colorscripts -n 
-end
-
 function fish_greeting
-     pokemon-colorscripts -n arceus
+    pokemon-colorscripts -n arceus
 end
