@@ -8,7 +8,7 @@
 # export base="$(pwd)"
 
 install-yay() {
-  x sudo pacman -Sy --needed --noconfirm base-devel
+  x sudo pacman -S --needed --noconfirm base-devel
   x git clone https://aur.archlinux.org/yay-bin.git /tmp/buildyay
   x cd /tmp/buildyay
   x makepkg -o
@@ -24,7 +24,7 @@ install-ags (){
   try git init -b main
   try git remote add origin https://github.com/Aylur/ags.git
   x git pull origin main && git submodule update --init --recursive
-  x git checkout b40b8d81c5543ef02caee67560ab1c13ebcee49a # "update examples"
+  x git checkout f905abfd2210701929ffaa3db13faa783b782765 # "update examples"
   x npm install
   x meson setup build
   x meson install -C build

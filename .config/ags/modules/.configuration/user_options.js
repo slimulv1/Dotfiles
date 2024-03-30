@@ -16,6 +16,9 @@ let configOptions = {
         'durationSmall': 110,
         'durationLarge': 180,
     },
+    'appearance': {
+        'keyboardUseFlag': false, // Use flag emoji instead of abbreviation letters
+    },
     'apps': {
         'imageViewer': "loupe",
         'terminal': "foot", // This is only for shell actions
@@ -23,6 +26,9 @@ let configOptions = {
     'battery': {
         'low': 20,
         'critical': 10,
+        'warnLevels': [20, 15, 5],
+        'warnTitles': ["Low battery", "Very low battery", 'Critical Battery'],
+        'warnMessages': ["Plug in the charger", "You there?", 'PLUG THE CHARGER ALREADY'],
     },
     'music': {
         'preferredPlayer': "plasma-browser-integration",
