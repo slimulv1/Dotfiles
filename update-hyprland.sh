@@ -5,7 +5,7 @@
 # The install.sh will install ags for you, why you still need this?
 # Because you may run this script to ONLY update ags, since ags is a very active project currently and updates frequently.
 #
-cd Downloads/
+cd ~/Downloads/
 git clone --recursive https://github.com/hyprwm/Hyprland
 cd Hyprland
 make all && sudo make install
