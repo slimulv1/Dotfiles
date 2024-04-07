@@ -96,7 +96,7 @@ export const keybindList = [[
             { "keys": ["", "+", "D"], "action": "Launch Vesktop" },
             { "keys": ["", "+", "U"], "action": "Launch Telegram" },
             { "keys": ["", "+", "Y"], "action": "Launch editor: Spotify" },
-            { "keys": ["", "+", "C"], "action": "Launch editor: vscode" },
+            { "keys": ["", "+", "C"], "action": "Launch editor: Vscodium" },
             { "keys": ["", "+", "O"], "action": "Launch Osu Lazer" },
             { "keys": ["", "+", "I"], "action": "Launch settings: GNOME Control center" }
         ],
